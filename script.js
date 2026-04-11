@@ -5,22 +5,45 @@ const deleteBtn = document.querySelector('.delete-btn');
 const checkbox = document.querySelector(
   '[data-testid="test-todo-complete-toggle"]'
 );
-const statusEl = document.querySelector('[data-testid="test-todo-status"]');
+const statusInProgress = document.querySelector('.status-in-progress');
+const statusDone = document.querySelector('.status-done');
+const dueEl = document.querySelector('.due-time');
+const taskTitle = document.querySelector('[data-testid="test-todo-title"]');
 
-const deadline = new Date('2026-04-16T00:00:00');
-const calcDueTime = function (deadline) {
+const dueDate = new Date('2026-04-16T00:00:00');
+const calcDueTime = function (deadline = dueDate) {
   const now = new Date();
 
   // Difference in Milliseconds
   const diffInMs = deadline - now;
   // Difference in Days
-  const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-  return diffInDays;
+  const days = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+  let label;
+  switch (true) {
+    case days > 1:
+      label = `Due in ${days} days`;
+      break;
+    case days === 1:
+      label = `Due tomorrow`;
+      break;
+    case days === 0:
+      label = `Due now`;
+      break;
+    default:
+      label = `Overdue by ${Math.abs(days)} ${Math.abs(days) === 1 ? 'day' : 'days'}`;
+      break;
+  }
+  dueEl.textContent = label;
 };
 
-// Update due time every 1000 milliseconds (1000 === 1s)
-setInterval(() => calcDueTime(deadline), 1000);
-console.log();
+// Load due time immediately
+calcDueTime();
+
+// Update due time every 60000 milliseconds (60000 === 60s)
+setInterval(() => {
+  calcDueTime();
+}, 60000);
 
 editBtn.addEventListener('click', function () {
   console.log('Edit clicked');
@@ -32,13 +55,12 @@ deleteBtn.addEventListener('click', function () {
 
 checkbox.addEventListener('change', function (event) {
   if (event.target.checked) {
-    console.log('Checkbox clicked');
-    statusEl.textContent = 'Done';
-    statusEl.classList.remove('status-in-progress');
-    statusEl.classList.add('status-done');
+    statusDone.classList.remove('hidden');
+    statusInProgress.classList.add('hidden');
+    taskTitle.classList.add('completed-text');
   } else {
-    statusEl.textContent = 'In Progress';
-    statusEl.classList.remove('status-done');
-    statusEl.classList.add('status-in-progress');
+    statusInProgress.classList.remove('hidden');
+    statusDone.classList.add('hidden');
+    taskTitle.classList.remove('completed-text');
   }
 });

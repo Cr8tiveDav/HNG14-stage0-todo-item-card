@@ -1,3 +1,5 @@
+/* MOBILE-FIRST APPROACH */
+
 *,
 *::before,
 *::after {
@@ -67,14 +69,25 @@ header input[type='checkbox']:checked {
   color: #000;
 }
 
+header input[type='checkbox']:focus-visible {
+  outline: 2px solid #14b8a6 !important;
+  outline-offset: 2px !important;
+}
+
 header h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
+  color: #fff;
 }
 header .priority-badge {
   color: #d4183d;
-  background-color: #d4183d1a;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.4rem;
+  background-color: #fef2f4;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.1rem 0.6rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .todo-body {
@@ -85,7 +98,7 @@ header .priority-badge {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .deadline span {
@@ -96,9 +109,37 @@ header .priority-badge {
   border-radius: 50%;
 }
 
+.time,
+.date {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.deadline .date {
+  color: #3b82f6;
+  background-color: #eff6ff;
+  padding: 0.1rem 0.6rem;
+  border-radius: 0.8rem;
+}
+
+.deadline .time {
+  color: #e67e22;
+  background-color: #fef9f3;
+  padding: 0.1rem 0.6rem;
+  border-radius: 0.8rem;
+}
+
 .status {
-  padding: 0.4rem 0.6rem;
-  border-radius: 0.4rem;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.8rem;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .status-in-progress {
@@ -108,7 +149,17 @@ header .priority-badge {
 
 .status-done {
   color: #14b8a6;
-  background-color: #14b8a61a;
+  background-color: #f0faf9;
+}
+
+.completed-text {
+  text-decoration: line-through;
+  color: #4b5563;
+  transition: all 0.3s ease;
+}
+
+.hidden {
+  display: none;
 }
 
 ul {
@@ -153,4 +204,15 @@ ul li {
   color: #d4183d;
   background-color: #d4183d1a; /* 1a = opacity of 10% */
   border: none;
+}
+
+/* TABLE & DESKTOP VIEW */
+@media (min-width: 768px) {
+  article {
+    max-width: 420px;
+  }
+
+  header h3 {
+    font-size: 1.2rem;
+  }
 }
