@@ -9,6 +9,11 @@ const statusInProgress = document.querySelector('.status-in-progress');
 const statusDone = document.querySelector('.status-done');
 const dueEl = document.querySelector('.due-time');
 const taskTitle = document.querySelector('[data-testid="test-todo-title"]');
+const editTask = document.querySelector('[data-testid="test-todo-edit-form"]');
+const viewTask = document.querySelector('.view-task');
+const cancelEditBtn = document.querySelector(
+  '[data-testid="test-todo-cancel-button"]'
+);
 
 const dueDate = new Date('2026-04-16T00:00:00');
 const calcDueTime = function (deadline = dueDate) {
@@ -45,8 +50,20 @@ setInterval(() => {
   calcDueTime();
 }, 60000);
 
+// Toggle between View and Edit Mode
+const toggleEditMode = function () {
+  viewTask.classList.toggle('hidden');
+  editTask.classList.toggle('hidden');
+};
+
+// Edit Form
 editBtn.addEventListener('click', function () {
-  console.log('Edit clicked');
+  toggleEditMode();
+});
+
+// View Task
+cancelEditBtn.addEventListener('click', function () {
+  toggleEditMode();
 });
 
 deleteBtn.addEventListener('click', function () {
