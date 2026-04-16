@@ -1,5 +1,3 @@
-import { formatDueDate } from '../utils.js';
-
 export const calcDueTime = function (deadline) {
   const deadlineDate = new Date(deadline);
   const now = new Date();

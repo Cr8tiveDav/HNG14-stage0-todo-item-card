@@ -1,4 +1,3 @@
-import { formatDueDate } from '../utils.js';
 import {
   isValidPriority,
   loadTaskData,

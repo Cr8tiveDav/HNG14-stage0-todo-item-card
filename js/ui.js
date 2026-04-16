@@ -1,4 +1,4 @@
-import { formatDueDate } from '../utils.js';
+import { formatDueDate } from './utils.js';
 import { calcDueTime, loadTaskData } from './state.js';
 
 export const renderTask = function (card) {
